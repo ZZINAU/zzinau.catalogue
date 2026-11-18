@@ -445,8 +445,8 @@ s.orig{font-size:12.5px;color:var(--muted);font-family:"Space Mono",monospace}
     <p class="bf-info-h">BLACK FRIDAY｜11/18–11/28</p>
     <p>澳洲正品 UGG，一樣不溢價，再給你黑五限定價 🤎</p>
     <div class="bf-legend">
-      <div class="bf-l"><span class="bf-chip">黑五 −$</span><div><b>精選鞋款黑五特價</b>，最低 NT$2,299 起<br>買這些鞋款，<b>OZLIFE 澳洲100%純羊毛圍巾</b>加購只要 <b>NT$1,099</b>（商品右上角標示「＋圍巾」）</div></div>
-      <div class="bf-l"><span class="bf-chip">黑五加購</span><div><b>指定鞋款原價不動</b>（含明星同款 658PP）<br><b>UGG 耳罩</b>加購只要 <b>NT$999</b>（商品右上角標示「＋耳罩」）</div></div>
+      <div class="bf-l"><span class="bf-chip">% OFF</span><div><b>精選鞋款黑五特價</b>，最低 NT$2,299 起<br>這些鞋款還有活動加購：<b>OZLIFE 澳洲100%純羊毛圍巾 NT$1,099</b></div></div>
+      <div class="bf-l"><span class="bf-chip">黑五加購</span><div>指定款式 <b>UGG 耳罩加購只要 NT$999</b></div></div>
     </div>
     <p class="bf-ship"><b>黑五運費：</b>滿 NT$5,000 店到店免運・滿 NT$10,000 免費宅配到家・未滿 NT$10,000 選宅配運費 NT$100</p>
     <p class="bf-warn">⚠️ 加購品數量有限，售完不補・加購價僅限搭配專區指定鞋款<br>⚠️ 活動至 11/28 23:59 止，之後恢復原價</p>
@@ -731,7 +731,7 @@ function priceVal(p){return p.poa?Number.POSITIVE_INFINITY:p.price;}
 function priceHTML(p){return p.poa
   ? `<span class="price poa">價格 · LINE 洽詢</span>`
   : `<span class="price"><span class="cur">NT$</span><span class="num${p.bf==="sale"?' bfp':p.orig?' sale':''}">${p.price.toLocaleString()}</span>${p.orig?`<s class="orig">NT$${p.orig.toLocaleString()}</s>`:''}</span>`;}
-function bfBadge(p){return p.bf==="sale"?`<span class="badge bfb">黑五 −$${(p.orig-p.price).toLocaleString()}</span>`:p.bf==="ear"?'<span class="badge bfb">黑五加購</span>':p.promo?'<span class="badge sale">促銷</span>':p.new?'<span class="badge">NEW</span>':'';}
+function bfBadge(p){return p.bf==="sale"?`<span class="badge bfb">${Math.floor((1-p.price/p.orig)*100)}% OFF</span>`:p.bf==="ear"?'<span class="badge bfb">黑五加購</span>':p.promo?'<span class="badge sale">促銷</span>':p.new?'<span class="badge">NEW</span>':'';}
 function bfTag(p){return p.bf==="sale"?'<span class="origin bft">＋圍巾 $1,099</span>':p.bf==="ear"?'<span class="origin bft">＋耳罩 $999</span>':'<span class="origin">🇦🇺 直送</span>';}
 function filtered(){
   let r=P.filter(p=>{
@@ -803,7 +803,7 @@ function openModal(p){
       ${p.cols.length?`<div class="mrow"><div class="lbl">顏色</div><div class="dots">${p.cols.map((c,gi)=>`<button class="cswatch${gi===0?' on':''}" data-color="${c}" data-u="${p.cimg?p.cimg[c]:''}" title="${CN[c]||c}" aria-label="${CN[c]||c}"><span class="dot" style="background:${COLORS[c]||'#ccc'}"></span></button>`).join('')}</div></div>`:''}
       ${p.sizes.length?`<div class="mrow"><div class="lbl">尺寸</div><div class="msizes">${p.sizes.map(s=>`<span>${s}</span>`).join('')}</div></div>`:''}
       <div class="mprice">${p.poa?`<span class="poa">價格 · 請 LINE 洽詢</span>`:`<span class="cur">NT$</span><span class="num${p.bf==="sale"?' bfp':p.orig?' sale':''}">${p.price.toLocaleString()}</span>${p.orig?`<s class="orig">原價 NT$${p.orig.toLocaleString()}</s>`:''}`}</div>
-      ${p.bf?`<div class="bfnote"><b>BLACK FRIDAY 黑五限定</b>${p.bf==="sale"?`黑五特價（原價 NT$${p.orig.toLocaleString()}）・可加購 <b>OZLIFE 澳洲100%純羊毛圍巾 NT$1,099</b>`:`原價不動・可加購 <b>UGG 耳罩 NT$999</b>`}<br><span>加購品數量有限，售完不補・加購價僅限搭配黑五專區指定鞋款・活動至 11/28 23:59 止</span></div>`:''}
+      ${p.bf?`<div class="bfnote"><b>BLACK FRIDAY 黑五限定</b>${p.bf==="sale"?`黑五特價 ${Math.floor((1-p.price/p.orig)*100)}% OFF・這款還有活動加購：<b>OZLIFE 澳洲100%純羊毛圍巾 NT$1,099</b>`:`指定款式 <b>UGG 耳罩加購只要 NT$999</b>`}<br><span>加購品數量有限，售完不補・加購價僅限搭配黑五專區指定鞋款・活動至 11/28 23:59 止</span></div>`:''}
       <div class="mnote">此價格為個人顧客購買售價，亦為代理最低販售價。代理價格請另外洽詢。</div>
       <div class="mcta">
         <a class="btn btn-line" href="https://lin.ee/pcNvb4Q" target="_blank" rel="noopener">
